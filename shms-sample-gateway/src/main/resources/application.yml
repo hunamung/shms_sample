@@ -1,0 +1,44 @@
+server:
+  port: ${server_port:8080}
+  
+spring:
+  application:
+    name: shms-sample-gateway
+  profiles:
+    active: ${profile:local}
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: user-svc
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: UserFilter
+              args:
+                baseMessage: Spring Cloud Gateway UserFilter
+                preLogger: true
+                postLogger: true
+        - id: cafe-svc
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/cafe/**
+          filters:
+            - name: CafeFilter
+              args:
+                baseMessage: Spring Cloud Gateway CafeFilter
+                preLogger: true
+                postLogger: true
+            
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://peer1.localhost:8761/eureka,http://peer2.localhost:8762/eureka
