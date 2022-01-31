@@ -15,19 +15,30 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+        - id: login-svc
+          uri: lb://SHMS-SAMPLE-LOGIN
+          predicates:
+            - Path=/login/**
+            
+        - id: auth-svc
+          uri: lb://SHMS-SAMPLE-AUTH
+          predicates:
+            - Path=/oauth/**
+            
         - id: user-svc
           #uri: http://localhost:8081/
           uri: lb://SHMS-SAMPLE-WEB
           predicates:
             - Path=/user/**
           filters:
-            - name: AuthorizationHeaderFilter
+            #- name: AuthorizationHeaderFilter
+            - name: UserFilter
               args:
-                baseMessage: Spring Cloud Gateway AuthorizationHeaderFilter
+                baseMessage: Spring Cloud Gateway UserFilter
                 preLogger: true
                 postLogger: true
+                
         - id: cafe-svc
-          #uri: http://localhost:8082/
           uri: lb://SHMS-SAMPLE-WEB
           predicates:
             - Path=/cafe/**

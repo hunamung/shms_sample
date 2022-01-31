@@ -8,12 +8,19 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 @Configuration
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        
+        http.anonymous().disable()
+            .authorizeRequests()
+            .antMatchers("/user/info").access("#oauth2.hasScope('shms_user_info')")
+            .anyRequest().authenticated();
+        
+        /*
         http.headers().frameOptions().disable();
         http.authorizeRequests()
-                .antMatchers("/").access("#oauth2.hasScope('read')")
+                .antMatchers("/").access("#oauth2.hasScope('shms_user_info')")
                 .anyRequest().authenticated();
+        */
     }
 }

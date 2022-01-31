@@ -3,15 +3,9 @@ server:
   
 spring:
   application:
-    name: shms-sample-web
+    name: shms-sample-login
   profiles:
     active: ${profile:local}
-    
-security:
-  oauth2:
-    resource:
-      jwt:
-        key-value: jwt_secret_key
 
 eureka:
   instance:

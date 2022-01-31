@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class ShmsSampleAuthApplication {
+public class ShmsSampleLoginApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShmsSampleAuthApplication.class, args);
+		SpringApplication.run(ShmsSampleLoginApplication.class, args);
 	}
 
 }

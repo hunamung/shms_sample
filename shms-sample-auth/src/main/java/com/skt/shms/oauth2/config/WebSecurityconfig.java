@@ -21,7 +21,15 @@ public class WebSecurityconfig extends WebSecurityConfigurerAdapter  {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // h2 데이터를 확인하기위해 h2-console url의 권한을 permitAll으로 바꾸어 줍니다.
-        http.authorizeRequests().antMatchers("/h2-console/**").permitAll().and().csrf().disable().headers().disable();
+        //http.authorizeRequests().antMatchers("/h2-console/**").permitAll().and().csrf().disable().headers().disable();
+        
+        http.csrf().disable()
+            .headers().frameOptions().disable()
+            .and()
+            .authorizeRequests().antMatchers("/oauth/**", "/oauth/token", "/oauth2/**", "/h2-console/*").permitAll()
+            .and()
+            .formLogin().and()
+            .httpBasic();
 
     }
 
