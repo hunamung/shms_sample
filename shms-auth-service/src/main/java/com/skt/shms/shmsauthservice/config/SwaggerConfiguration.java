@@ -29,8 +29,8 @@ public class SwaggerConfiguration {
     private ApiInfo swaggerInfo() {
         return new ApiInfoBuilder().title("SpringBoot API Documentation")
                 .description("스프링부트 애플리케이션 API 설명을 위한 문서입니다.")
-                .license("woonsik")
-                .licenseUrl("helloWorld/string")
+                .license("SKTelecom")
+                .licenseUrl("http://shms.sktelecom.com")
                 .version("1")
                 .build();
     }

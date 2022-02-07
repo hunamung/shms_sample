@@ -3,13 +3,11 @@ package com.skt.shms.shmsauthservice.service.response;
 import com.skt.shms.shmsauthservice.model.response.CommonResult;
 import com.skt.shms.shmsauthservice.model.response.ListResult;
 import com.skt.shms.shmsauthservice.model.response.SingleResult;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@Slf4j
 public class ResponseService {
 
     // 단일건 결과 처리 메소드

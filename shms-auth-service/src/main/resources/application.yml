@@ -1,11 +1,8 @@
 spring:
   profiles:
     include: private, ${profile:local}
-
-  freemarker:
-    template-loader-path: classpath:/templates
-    suffix: .ftl
-
+  application:
+    name: shms-auth-service
   messages:
     basename: i18n/exception
     encoding: UTF-8

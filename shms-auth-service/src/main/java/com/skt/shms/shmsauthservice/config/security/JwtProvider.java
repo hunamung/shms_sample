@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+//import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.lang.String;
@@ -37,7 +37,7 @@ public class JwtProvider {
     protected void init() {
         // 암호화
         secretKey = Base64UrlCodec.BASE64URL.encode(secretKey.getBytes(StandardCharsets.UTF_8));
-//        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        //secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
     // Jwt 생성

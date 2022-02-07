@@ -1,7 +1,5 @@
 package com.skt.shms.shmsauthservice.advice.exception;
 
-import com.skt.shms.shmsauthservice.domain.user.User;
-
 public class CUserNotFoundException extends RuntimeException {
 
     public CUserNotFoundException(String message, Throwable cause) {

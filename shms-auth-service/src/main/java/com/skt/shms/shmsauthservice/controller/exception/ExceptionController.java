@@ -5,7 +5,6 @@ import com.skt.shms.shmsauthservice.advice.exception.CAuthenticationEntryPointEx
 import com.skt.shms.shmsauthservice.model.response.CommonResult;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

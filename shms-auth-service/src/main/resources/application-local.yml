@@ -2,22 +2,23 @@ logging:
   level:
     root: warn
     com.skt.shms.shmsauthservice: debug #debug info warn error fatal off
+
 server:
   port: 8095
 
 spring:
+  config:
+    activate:
+      on-profile: local
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant_path_matcher #for swagger-ui
   datasource:
     #url: jdbc:h2:tcp://localhost/~/restApi
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
     password:
-  messages:
-    basename: i18n/exception
-    encoding: UTF-8
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     properties.hibernate:
@@ -26,11 +27,6 @@ spring:
     show-sql: true
     generate-ddl: true
     open-in-view: false
-  url:
-    base: http://localhost:8095
-  config:
-    activate:
-      on-profile: local
 
 eureka:
   instance:

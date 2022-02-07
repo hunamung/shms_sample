@@ -120,18 +120,6 @@ public class ExceptionAdvice {
 
     /***
      * -1007
-     * Social 인증 과정에서 문제 발생하는 에러
-     */
-    @ExceptionHandler(CCommunicationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected CommonResult communicationException(HttpServletRequest request, CCommunicationException e) {
-        return responseService.getFailResult(
-                Integer.parseInt(getMessage("communicationException.code")), getMessage("communicationException.msg")
-        );
-    }
-
-    /***
-     * -1008
      * 기 가입자 에러
      */
     @ExceptionHandler(CUserExistException.class)
@@ -139,18 +127,6 @@ public class ExceptionAdvice {
     protected CommonResult existUserException(HttpServletRequest request, CUserExistException e) {
         return responseService.getFailResult(
                 Integer.parseInt(getMessage("userExistException.code")), getMessage("userExistException.msg")
-        );
-    }
-
-    /***
-     * -1009
-     * 소셜 로그인 시 필수 동의항목 미동의시 에러
-     */
-    @ExceptionHandler(CSocialAgreementException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected CommonResult socialAgreementException(HttpServletRequest request, CSocialAgreementException e) {
-        return responseService.getFailResult(
-                Integer.parseInt(getMessage("agreementException.code")), getMessage("agreementException.msg")
         );
     }
 

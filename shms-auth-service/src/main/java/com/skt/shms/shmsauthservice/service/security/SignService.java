@@ -11,13 +11,11 @@ import com.skt.shms.shmsauthservice.dto.jwt.TokenRequestDto;
 import com.skt.shms.shmsauthservice.dto.sign.UserLoginRequestDto;
 import com.skt.shms.shmsauthservice.dto.sign.UserSignupRequestDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SignService {

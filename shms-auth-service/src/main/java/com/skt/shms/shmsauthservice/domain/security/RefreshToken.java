@@ -1,7 +1,6 @@
 package com.skt.shms.shmsauthservice.domain.security;
 
 import com.skt.shms.shmsauthservice.domain.BaseTimeEntity;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
