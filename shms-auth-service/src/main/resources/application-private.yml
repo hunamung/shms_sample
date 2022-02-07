@@ -1,0 +1,15 @@
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: jwt_secret_key
+
+social:
+  kakao:
+    client-id: ggggg
+    redirect: /oauth/kakao/redirect
+    url:
+      login: https://kauth.kakao.com/oauth/authorize
+      token: https://kauth.kakao.com/oauth/authorize
+      profile: https://kauth.kakao.com/oauth/authorize
+      unlink: https://kauth.kakao.com/oauth/authorize
