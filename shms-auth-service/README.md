@@ -44,14 +44,15 @@ eureka:
     service-url:
       defaultZone: http://peer1.localhost:8761/eureka,http://peer2.localhost:8762/eureka
 ```
-      
+* * *
 ## SWAGGER UI 로 호출확인
 -> 접속주소 : http://localhost:8095/swagger-ui.html
 -> API 테스트 가능
 ![image](https://user-images.githubusercontent.com/16300042/152822290-5f09a79b-9fbc-4dd0-8435-13262ad55443.png)
-
+* * *
 ## H2 DB 확인
 -> USER, USER_ROLE, REFRESH_TOKEN 테이블 확인 \
 -> 로그아웃시, 만료일자 현재일로 처리하는 부분 구현필요 \
 -> REFRESH_TOKEN으로 ACCESS_TOKEN 재발급부분 구현필요 \
+-> JPA 대신 mybatis로 구현필요 \
 ![image](https://user-images.githubusercontent.com/16300042/152822055-fb50dd8e-f011-4113-9f36-ffd6bc1c9362.png)
