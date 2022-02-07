@@ -42,7 +42,8 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://peer1.localhost:8761/eureka,http://peer2.localhost:8762/eureka```
+      defaultZone: http://peer1.localhost:8761/eureka,http://peer2.localhost:8762/eureka
+```
       
 ## SWAGGER UI 로 호출확인
 -> 접속주소 : http://localhost:8095/swagger-ui.html
