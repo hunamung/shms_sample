@@ -1,4 +1,4 @@
-package com.skt.shms.shmsauthservice.controller.v1;
+package com.skt.shms.shmsauthservice.controller.auth;
 
 import com.skt.shms.shmsauthservice.dto.jwt.TokenDto;
 import com.skt.shms.shmsauthservice.dto.jwt.TokenRequestDto;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = {"1. SignUp/LogIn"})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/auth")
 public class SignController {
 
     private final SignService signService;
@@ -51,4 +51,13 @@ public class SignController {
         return responseService.getSingleResult(signService.reissue(tokenRequestDto));
     }
 
+    @ApiOperation(value = "로그아웃(구현중)", notes = "이메일로 로그아웃을 합니다.")
+    @PostMapping("/logout")
+    public SingleResult<Long> logout(
+            @ApiParam(value = "로그아웃 요청 DTO", required = true)
+            @RequestBody UserLoginRequestDto userLoginRequestDto) {
+
+        //Long signupId = signService.signup(userSignupRequestDto);
+        return responseService.getSingleResult(999l); //temparary
+    }
 }

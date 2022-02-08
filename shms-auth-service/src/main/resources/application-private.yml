@@ -2,4 +2,4 @@ security:
   oauth2:
     resource:
       jwt:
-        key-value: jwt_secret_key
+        key-value: demo-shms

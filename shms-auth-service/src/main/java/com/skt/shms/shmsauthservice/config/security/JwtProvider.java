@@ -29,8 +29,9 @@ public class JwtProvider {
     @Value("spring.jwt.secret")
     private String secretKey;
     private String ROLES = "roles";
-    private final Long accessTokenValidMillisecond = 60 * 60 * 1000L; // 1 hour
-    private final Long refreshTokenValidMillisecond = 14 * 24 * 60 * 60 * 1000L; // 14 day
+    private final Long accessTokenValidMillisecond = 30 * 60 * 1000L; // 30분
+    private final Long refreshTokenValidMillisecond = 7 * 24 * 60 * 60 * 1000L; // 7일
+
     private final UserDetailsService userDetailsService;
 
     @PostConstruct
@@ -114,7 +115,12 @@ public class JwtProvider {
             log.error("지원하지 않는 토큰입니다.");
         } catch (IllegalArgumentException e) {
             log.error("잘못된 토큰입니다.");
+        } catch (SignatureException  e) {
+            log.error("서명 오류입니다.");
+        } catch(Exception e){
+            log.error("알수없는 오류입니다. : {}", e.toString());
         }
+        
         return false;
     }
 }

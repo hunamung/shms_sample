@@ -1,4 +1,4 @@
-package com.skt.shms.shmsauthservice.controller.v1;
+package com.skt.shms.shmsauthservice.controller.auth;
 
 import com.skt.shms.shmsauthservice.dto.user.UserRequestDto;
 import com.skt.shms.shmsauthservice.dto.user.UserResponseDto;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = {"2. User"})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/auth")
 public class UserController {
 
     private final UserService userService;

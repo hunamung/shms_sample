@@ -55,15 +55,6 @@ public class SignService {
     }
 
     @Transactional
-    public Long socialSignup(UserSignupRequestDto userSignupRequestDto) {
-        if (userJpaRepo
-                .findByEmailAndProvider(userSignupRequestDto.getEmail(), userSignupRequestDto.getProvider())
-                .isPresent()
-        ) throw new CUserExistException();
-        return userJpaRepo.save(userSignupRequestDto.toEntity()).getUserId();
-    }
-
-    @Transactional
     public TokenDto reissue(TokenRequestDto tokenRequestDto) {
         // 만료된 refresh token 에러
         if (!jwtProvider.validationToken(tokenRequestDto.getRefreshToken())) {

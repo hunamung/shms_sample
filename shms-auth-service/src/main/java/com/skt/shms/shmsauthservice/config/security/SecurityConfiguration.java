@@ -3,13 +3,16 @@ package com.skt.shms.shmsauthservice.config.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+//import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 //@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @RequiredArgsConstructor
@@ -37,12 +40,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/v1/signup", "/v1/login",
-                        "/v1/reissue", "/v1/social/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/oauth/kakao/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
-                .anyRequest().hasRole("USER")
-
+                // .antMatchers(HttpMethod.POST, "/v1/signup", "/v1/login", "/v1/reissue").permitAll()
+                // .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
+                // .anyRequest().hasRole("USER")
+                
+                // G/W에 JWT Filter를 추가해서 전체 권한 해제
+                .anyRequest().permitAll()
 
                 .and()
                 .exceptionHandling()
@@ -58,5 +61,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
                 "/swagger-ui.html", "/webjars/**", "/swagger/**", "/h2-console/**");
                 //"/swagger-ui/**", "/webjars/**", "/swagger/**", "/h2-console/**"); //swagger2:3.0.0 버전용
+    }
+
+    // CORS 허용 적용
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOriginPattern("*");
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
