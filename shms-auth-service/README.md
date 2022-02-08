@@ -48,8 +48,8 @@ eureka:
 ## SWAGGER UI 로 호출확인
 -> 접속주소 : http://localhost:8095/swagger-ui.html \
 -> Sign Controller 대신 Login Controller로 변경중 \
--> Signup 대신 join 으로 변경중
--> logout은 구현중 \
+-> /auth/signup 대신 /auth/join 으로 변경중 \
+-> /auth/logout은 구현중 \
 ![image](https://user-images.githubusercontent.com/16300042/152896480-710bf2b5-7cd1-48f0-9307-34ba9d516c1d.png)
 * * *
 ## H2 DB 확인
