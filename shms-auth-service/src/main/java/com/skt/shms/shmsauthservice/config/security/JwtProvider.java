@@ -29,7 +29,7 @@ public class JwtProvider {
     @Value("spring.jwt.secret")
     private String secretKey;
     private String ROLES = "roles";
-    private final Long accessTokenValidMillisecond = 30 * 60 * 1000L; // 30분
+    private final Long accessTokenValidMillisecond = 30 * 60 * 1000L;           // 30분
     private final Long refreshTokenValidMillisecond = 7 * 24 * 60 * 60 * 1000L; // 7일
 
     private final UserDetailsService userDetailsService;
@@ -93,6 +93,7 @@ public class JwtProvider {
         try {
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
+            log.error("만료된 토큰입니다.");
             return e.getClaims();
         }
     }

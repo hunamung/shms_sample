@@ -1,4 +1,4 @@
-package com.skt.shms.shmsauthservice.dto.sign;
+package com.skt.shms.shmsauthservice.dto.join;
 
 import com.skt.shms.shmsauthservice.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Collections;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSignupRequestDto {
+public class UserJoinRequestDto {
     private String email;
     private String password;
     private String name;

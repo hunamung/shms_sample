@@ -6,10 +6,11 @@ import com.skt.shms.shmsauthservice.domain.security.RefreshToken;
 import com.skt.shms.shmsauthservice.domain.security.RefreshTokenJpaRepo;
 import com.skt.shms.shmsauthservice.domain.user.User;
 import com.skt.shms.shmsauthservice.domain.user.UserJpaRepo;
+import com.skt.shms.shmsauthservice.dto.join.UserJoinRequestDto;
+import com.skt.shms.shmsauthservice.dto.join.UserLoginRequestDto;
 import com.skt.shms.shmsauthservice.dto.jwt.TokenDto;
 import com.skt.shms.shmsauthservice.dto.jwt.TokenRequestDto;
-import com.skt.shms.shmsauthservice.dto.sign.UserLoginRequestDto;
-import com.skt.shms.shmsauthservice.dto.sign.UserSignupRequestDto;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SignService {
+public class JoinService {
     private final UserJpaRepo userJpaRepo;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
@@ -48,10 +49,10 @@ public class SignService {
     }
 
     @Transactional
-    public Long signup(UserSignupRequestDto userSignupDto) {
-        if (userJpaRepo.findByEmail(userSignupDto.getEmail()).isPresent())
-            throw new CEmailSignupFailedException();
-        return userJpaRepo.save(userSignupDto.toEntity(passwordEncoder)).getUserId();
+    public Long join(UserJoinRequestDto userJoinDto) {
+        if (userJpaRepo.findByEmail(userJoinDto.getEmail()).isPresent())
+            throw new CEmailJoinFailedException();
+        return userJpaRepo.save(userJoinDto.toEntity(passwordEncoder)).getUserId();
     }
 
     @Transactional

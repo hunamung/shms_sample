@@ -39,21 +39,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 .and()
+                .cors()
+
+                .and()
                 .authorizeRequests()
                 // .antMatchers(HttpMethod.POST, "/v1/signup", "/v1/login", "/v1/reissue").permitAll()
                 // .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
                 // .anyRequest().hasRole("USER")
                 
                 // G/W에 JWT Filter를 추가해서 전체 권한 해제
-                .anyRequest().permitAll()
+                .anyRequest().permitAll();
 
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(customAuthenticationEntryPoint)
-                .accessDeniedHandler(customAccessDeniedHandler)
+                // .and()
+                // .exceptionHandling()
+                // .authenticationEntryPoint(customAuthenticationEntryPoint)
+                // .accessDeniedHandler(customAccessDeniedHandler)
 
-                .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                // .and()
+                // .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

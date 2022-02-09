@@ -1,4 +1,4 @@
-package com.skt.shms.shmsauthservice.dto.sign;
+package com.skt.shms.shmsauthservice.dto.join;
 
 import com.skt.shms.shmsauthservice.domain.user.User;
 import lombok.AllArgsConstructor;

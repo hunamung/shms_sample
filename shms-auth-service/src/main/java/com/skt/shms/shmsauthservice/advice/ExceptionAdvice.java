@@ -62,11 +62,11 @@ public class ExceptionAdvice {
      * -1002
      * 회원 가입 시 이미 로그인 된 이메일인 경우 발생 시키는 예외
      */
-    @ExceptionHandler(CEmailSignupFailedException.class)
+    @ExceptionHandler(CEmailJoinFailedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    protected CommonResult emailSignupFailedException(HttpServletRequest request, CEmailSignupFailedException e) {
+    protected CommonResult emailJoinFailedException(HttpServletRequest request, CEmailJoinFailedException e) {
         return responseService.getFailResult(
-                Integer.parseInt(getMessage("emailSignupFailed.code")), getMessage("emailSignupFailed.msg")
+                Integer.parseInt(getMessage("emailJoinFailed.code")), getMessage("emailJoinFailed.msg")
         );
     }
 

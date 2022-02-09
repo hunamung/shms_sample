@@ -5,6 +5,8 @@ import com.skt.shms.shmsauthservice.dto.user.UserRequestDto;
 import com.skt.shms.shmsauthservice.domain.user.User;
 import com.skt.shms.shmsauthservice.domain.user.UserJpaRepo;
 import com.skt.shms.shmsauthservice.dto.user.UserResponseDto;
+import com.skt.shms.shmsauthservice.dto.user.UserRResponseDto;
+import com.skt.shms.shmsauthservice.mapper.user.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService {
     private UserJpaRepo userJpaRepo;
+    private UserMapper userMapper;
 
     @Transactional
     public Long save(UserRequestDto userDto) {
@@ -28,6 +31,13 @@ public class UserService {
         User user = userJpaRepo.findById(id)
                 .orElseThrow(CUserNotFoundException::new);
         return new UserResponseDto(user);
+    }
+
+    @Transactional(readOnly = true)
+    public UserRResponseDto findByIdUsingMapper(Long id) {
+        UserRResponseDto user = userMapper.findById(id)
+                .orElseThrow(CUserNotFoundException::new);
+        return user;
     }
 
     @Transactional(readOnly = true)
