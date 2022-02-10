@@ -1,8 +1,6 @@
-package com.skt.shms.shmsauthservice.config.security;
+package com.skt.shms.shmsauthservice.config.jwt;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -36,9 +34,9 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         log.info("[Verifying token] >>>> " + ((HttpServletRequest) request).getRequestURL().toString());
         
         if (token != null && jwtProvider.validationToken(token)) {
-            Authentication authentication = jwtProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            //유효한 토큰일 때 별도 처리
         }
+
         filterChain.doFilter(request, response);
     }
 }

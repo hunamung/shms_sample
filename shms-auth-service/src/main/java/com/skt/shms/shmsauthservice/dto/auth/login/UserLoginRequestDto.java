@@ -1,22 +1,25 @@
-package com.skt.shms.shmsauthservice.dto.join;
+package com.skt.shms.shmsauthservice.dto.auth.login;
 
-import com.skt.shms.shmsauthservice.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Builder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UserLoginRequestDto {
+    private String userId;
     private String email;
     private String password;
 
-    public User toUser(PasswordEncoder passwordEncoder) {
-        return User.builder()
+    public UserLoginRequestDto toEntity(PasswordEncoder passwordEncoder) {
+        return UserLoginRequestDto.builder()
+                .userId(userId)
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .build();

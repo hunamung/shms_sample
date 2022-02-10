@@ -19,15 +19,18 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+    sql-script-encoding: UTF-8
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties.hibernate:
-      hbm2ddl.auto : update
-      format_sql: true
-    show-sql: true
-    generate-ddl: true
-    open-in-view: false
-    
+    hibernate:
+      ddl-auto: none
+    # database-platform: org.hibernate.dialect.H2Dialect
+    # properties.hibernate:
+    #   hbm2ddl.auto : update
+    #   format_sql: true
+    # show-sql: true
+    # generate-ddl: true
+    # open-in-view: false
+
 eureka:
   instance:
     prefer-ip-address: true

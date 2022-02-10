@@ -1,22 +1,19 @@
-package com.skt.shms.shmsauthservice.config.security;
+package com.skt.shms.shmsauthservice.config.jwt;
 
 import com.skt.shms.shmsauthservice.advice.exception.CAuthenticationEntryPointException;
-import com.skt.shms.shmsauthservice.dto.jwt.TokenDto;
+import com.skt.shms.shmsauthservice.dto.auth.jwt.TokenResponseDto;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.Base64UrlCodec;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-//import java.util.Base64;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.lang.String;
@@ -32,49 +29,77 @@ public class JwtProvider {
     private final Long accessTokenValidMillisecond = 30 * 60 * 1000L;           // 30분
     private final Long refreshTokenValidMillisecond = 7 * 24 * 60 * 60 * 1000L; // 7일
 
-    private final UserDetailsService userDetailsService;
-
     @PostConstruct
     protected void init() {
         // 암호화
         secretKey = Base64UrlCodec.BASE64URL.encode(secretKey.getBytes(StandardCharsets.UTF_8));
-        //secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    // Jwt 생성
-    public TokenDto createTokenDto(Long userPk, List<String> roles) {
+    // Jwt 생성 (Refresh Token & Accss Token)
+    public TokenResponseDto createTokenDto(String userId, List<String> roles) {
 
         // Claims 에 user 구분을 위한 User pk 및 authorities 목록 삽입
-        Claims claims = Jwts.claims().setSubject(String.valueOf(userPk));
+        Claims claims = Jwts.claims().setSubject(userId);
         claims.put(ROLES, roles);
 
         // 생성날짜, 만료날짜를 위한 Date
         Date now = new Date();
 
+        Timestamp accessTokenExpireDate = new Timestamp(now.getTime() + accessTokenValidMillisecond);
+        Timestamp refreshTokenExpireDate = new Timestamp(now.getTime() + refreshTokenValidMillisecond);
+
         String accessToken = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + accessTokenValidMillisecond))
+                .setExpiration(accessTokenExpireDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
         String refreshToken = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setExpiration(new Date(now.getTime() + refreshTokenValidMillisecond))
+                .setExpiration(refreshTokenExpireDate)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
 
-        return TokenDto.builder()
+        return TokenResponseDto.builder()
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .accessTokenExpireDate(accessTokenValidMillisecond)
+                .accessTokenExpireDate(accessTokenExpireDate)
+                .refreshTokenExpireDate(refreshTokenExpireDate)
+                .build();
+    }
+
+    // Jwt 생성 (Accss Token)
+    public TokenResponseDto createAccessTokenDto(String userId, List<String> roles) {
+
+        // Claims 에 user 구분을 위한 User pk 및 authorities 목록 삽입
+        Claims claims = Jwts.claims().setSubject(userId);
+        claims.put(ROLES, roles);
+
+        // 생성날짜, 만료날짜를 위한 Date
+        Date now = new Date();
+
+        Timestamp accessTokenExpireDate = new Timestamp(now.getTime() + accessTokenValidMillisecond);
+
+        String accessToken = Jwts.builder()
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(accessTokenExpireDate)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .compact();
+
+        return TokenResponseDto.builder()
+                .grantType("Bearer")
+                .accessToken(accessToken)
+                .accessTokenExpireDate(accessTokenExpireDate)
                 .build();
     }
 
     // Jwt 로 인증정보를 조회
-    public Authentication getAuthentication(String token) {
+    public Claims getAuthentication(String token) {
 
         // Jwt 에서 claims 추출
         Claims claims = parseClaims(token);
@@ -84,8 +109,7 @@ public class JwtProvider {
             throw new CAuthenticationEntryPointException();
         }
 
-        UserDetails userDetails = userDetailsService.loadUserByUsername(claims.getSubject());
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return claims;
     }
 
     // Jwt 토큰 복호화해서 가져오기

@@ -1,6 +1,9 @@
 package com.skt.shms.shmsauthservice.config.security;
 
 import lombok.RequiredArgsConstructor;
+
+import com.skt.shms.shmsauthservice.config.jwt.JwtProvider;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.http.HttpMethod;

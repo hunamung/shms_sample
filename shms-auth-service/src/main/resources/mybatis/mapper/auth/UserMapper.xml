@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.skt.shms.shmsauthservice.mapper.user.UserMapper">
+	
+	<select id="findByUserId" resultType="UserResponseDto" parameterType="String">
+		SELECT * FROM user WHERE user_id = #{id}
+	</select>
+
+	<select id="findAllUser" resultType="UserResponseDto">
+		SELECT * FROM user
+	</select>
+
+	<update id="insert" parameterType="UserJoinRequestDto">
+		INSERT INTO user (user_id, password, name, nick_name, email, created_date, modified_date)
+		VALUES (#{userId}, #{password}, #{name}, #{nickName}, #{email}, now(), now())
+	</update>
+
+</mapper>
