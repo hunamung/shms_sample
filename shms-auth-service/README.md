@@ -26,15 +26,10 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+    sql-script-encoding: UTF-8
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    properties.hibernate:
-      hbm2ddl.auto : update
-      format_sql: true
-    show-sql: true
-    generate-ddl: true
-    open-in-view: false
-
+    hibernate:
+      ddl-auto: none
 eureka:
   instance:
     prefer-ip-address: true
@@ -47,14 +42,10 @@ eureka:
 * * *
 ## SWAGGER UI 로 호출확인
 -> 접속주소 : http://localhost:8095/swagger-ui.html \
--> Sign Controller 대신 Login Controller로 변경중 \
--> /auth/signup 대신 /auth/join 으로 변경중 \
--> /auth/logout은 구현중 \
-![image](https://user-images.githubusercontent.com/16300042/152896480-710bf2b5-7cd1-48f0-9307-34ba9d516c1d.png)
+![image](https://user-images.githubusercontent.com/16300042/153410628-ce51025e-ef6c-4703-a647-939076757d11.png)
 * * *
 ## H2 DB 확인
--> USER, USER_ROLE, REFRESH_TOKEN 테이블 확인가능 \
--> logout시, 만료일자 현재일로 처리하는 부분 구현필요 \
--> REFRESH_TOKEN으로만 ACCESS_TOKEN 재발급부분 구현필요 \
--> JPA 대신 mybatis로 구현필요 \
-![image](https://user-images.githubusercontent.com/16300042/152822055-fb50dd8e-f011-4113-9f36-ffd6bc1c9362.png)
+-> logout시, 만료일자 처리 구현 \
+-> REFRESH_TOKEN으로만 ACCESS_TOKEN 재발급부분 구현 \
+-> JPA 대신 mybatis로 구현 \
+![image](https://user-images.githubusercontent.com/16300042/153411108-7997838d-f161-4843-890a-51f077d72ac8.png)
