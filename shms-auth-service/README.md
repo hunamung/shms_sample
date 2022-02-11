@@ -41,8 +41,8 @@ eureka:
 ```
 * * *
 ## SWAGGER UI 로 호출확인
--> 접속주소 : http://localhost:8095/swagger-ui.html \
-![image](https://user-images.githubusercontent.com/16300042/153410628-ce51025e-ef6c-4703-a647-939076757d11.png)
+-> 접속주소 : http://localhost:8095/swagger-ui/ \
+![image](https://user-images.githubusercontent.com/16300042/153529307-16938075-0abd-4e1f-bd71-f93ec31292fc.png)
 * * *
 ## H2 DB 확인
 -> logout시, 만료일자 처리 구현 \
