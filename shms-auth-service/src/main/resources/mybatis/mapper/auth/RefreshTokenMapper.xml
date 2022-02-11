@@ -8,7 +8,7 @@
 		FROM refresh_token 
 		WHERE user_id = #{userId}
 		  AND expire_date > now()
-		  AND no = (SELECT ifnull(max(no),0) FROM refresh_token WHERE user_id = #{userId}) 
+		  AND no = (SELECT ifnull(max(no),0) FROM refresh_token WHERE user_id = #{userId})
 	</select>
 	
 	<select id="findNextNoByUserId" resultType="Integer" parameterType="String">
