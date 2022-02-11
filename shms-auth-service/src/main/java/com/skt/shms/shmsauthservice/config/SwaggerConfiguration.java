@@ -16,7 +16,8 @@ public class SwaggerConfiguration {
 
     @Bean
     public Docket SwaggerApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        //return new Docket(DocumentationType.SWAGGER_2) //SWAGGER 2 사용시
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(swaggerInfo()) // API Docu 및 작성자 정보 매핑
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.skt.shms.shmsauthservice.controller"))
